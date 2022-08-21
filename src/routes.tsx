@@ -9,6 +9,8 @@ export default function AppRoutes(): JSX.Element {
 			<ScrollToTop>
 				<Routes>
 					<Route path="/" element={<Home />} />
+					<Route path="/cozinha" element={<Home />} />
+					<Route path="/retirada" element={<Home />} />
 				</Routes>
 			</ScrollToTop>
 		</Router>
