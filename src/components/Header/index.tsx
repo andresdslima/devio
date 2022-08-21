@@ -9,13 +9,13 @@ export default function Header() {
 		<S.SContainer>
 			<S.SLogo src={logo} alt="Logo" />
 			<nav>
-				<S.SLink active={path === '/'} to="/">
+				<S.SLink active={`${path === '/'}`} to="/">
 					Pedidos
 				</S.SLink>
-				<S.SLink active={path === '/cozinha'} to="/cozinha">
+				<S.SLink active={`${path === '/cozinha'}`} to="/cozinha">
 					Cozinha
 				</S.SLink>
-				<S.SLink active={path === '/retirada'} to="/retirada">
+				<S.SLink active={`${path === '/retirada'}`} to="/retirada">
 					Retirada
 				</S.SLink>
 			</nav>

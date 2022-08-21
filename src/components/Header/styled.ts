@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 interface LinkProps {
-	active?: boolean;
+	active?: string;
 }
 
 export const SContainer = styled(Container)`
@@ -45,7 +45,8 @@ export const SLogo = styled.img`
 export const SLink = styled(Link)<LinkProps>`
 	color: #fff;
 	margin-right: 1rem;
-	background-color: ${props => (props.active ? '#0C400D' : 'transparent')};
+	background-color: ${props =>
+		props.active === 'true' ? '#0C400D' : 'transparent'};
 	padding: 0.5rem 1rem;
 	border-radius: 0.5rem;
 	font-size: 0.875rem;
