@@ -25,6 +25,15 @@ export const SContainer = styled(Container)`
 
 	@media (max-width: 768px) {
 		padding: 1rem;
+
+		div {
+			&.buttonContainer {
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				gap: 1rem;
+			}
+		}
 	}
 `;
 
@@ -61,6 +70,28 @@ export const SGridContainer = styled.div`
 			border: 2px solid #125c13;
 		}
 	}
+
+	@media (max-width: 768px) {
+		grid-template-columns: 1fr 1fr 1fr;
+
+		div {
+			filter: grayscale(0%);
+		}
+	}
+
+	@media (max-width: 425px) {
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 2rem;
+
+		div {
+			width: 150px;
+			height: 200px;
+
+			img {
+				width: 40%;
+			}
+		}
+	}
 `;
 
 export const SInput = styled.input`
@@ -92,5 +123,15 @@ export const SButton = styled(Button)<ButtonProps>`
 		border: ${props => (props.color === '#fff' ? '1px solid #f00' : 'none')};
 		color: ${props => (props.color === '#fff' ? '#f00' : '#fff')};
 		background-color: ${props => (props.color === '#fff' ? '#fff' : '#125c13')};
+	}
+
+	@media (max-width: 768px) {
+		width: 50%;
+		margin: 0 auto;
+	}
+
+	@media (max-width: 425px) {
+		width: 80%;
+		margin: 0 auto;
 	}
 `;
