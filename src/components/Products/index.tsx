@@ -1,29 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './styled';
 import { products } from '../../services/products';
-import { ModalProps, ProductProps } from '../../types';
+import { ModalProps } from '../../types';
+import CardProduct from '../CardProduct';
 
 export default function Products({ setShowModal }: ModalProps) {
 	const [searchValue, setSearchValue] = useState('');
 	const [productsList, setProductsList] = useState(products);
 
-	const getMyOrder = () => {
-		return JSON.parse(localStorage.getItem('products') || `[]`);
-	};
-
 	const cancelOrder = () => {
 		localStorage.setItem('products', '[]');
 		window.location.reload();
-	};
-
-	const addItem = (product: ProductProps) => {
-		const myOrder = getMyOrder();
-
-		if (myOrder.length === 0) {
-			localStorage.setItem('products', JSON.stringify([product]));
-		} else {
-			localStorage.setItem('products', JSON.stringify([...myOrder, product]));
-		}
 	};
 
 	useEffect(() => {
@@ -53,21 +40,13 @@ export default function Products({ setShowModal }: ModalProps) {
 				<p>Selecione um produto para adicionar ao seu pedido.</p>
 				<S.SGridContainer>
 					{productsList.map(product => (
-						// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-						<div
-							key={product.id}
-							onClick={event => {
-								addItem(product);
-								event.currentTarget.classList.add('active');
-							}}
-						>
-							<img src={product.image} alt={product.name} />
-							<h4>{product.name}</h4>
-							<small>
-								<em>{product.description}</em>
-							</small>
-							<strong>R${product.price}</strong>
-						</div>
+						<CardProduct
+							id={product.id}
+							name={product.name}
+							description={product.description}
+							price={product.price}
+							image={product.image}
+						/>
 					))}
 				</S.SGridContainer>
 			</div>

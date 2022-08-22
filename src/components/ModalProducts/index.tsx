@@ -56,16 +56,5 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 				</Modal.Footer>
 			</S.SSubcontainer>
 		</S.SDivModal>
-
-		// <>
-		// 	<div />
-		// 	{showModal && (
-		// 		<S.SContainer>
-		// 			<S.SSubcontainer>
-		// 				<h2>Revise seu pedido</h2>
-		// 			</S.SSubcontainer>
-		// 		</S.SContainer>
-		// 	)}
-		// </>
 	);
 }
