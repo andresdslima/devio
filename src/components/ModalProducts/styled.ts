@@ -1,20 +1,5 @@
 import styled from 'styled-components';
-import { Container, Modal } from 'react-bootstrap';
-
-export const SContainer = styled(Container)`
-	padding: 5rem 15rem;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 100vw;
-	height: 100vh;
-	background-color: #9f9f9f;
-	opacity: 0.9;
-	position: fixed;
-	z-index: 1;
-	top: 0;
-	left: 0;
-`;
+import { Modal } from 'react-bootstrap';
 
 export const SSubcontainer = styled.div`
 	background-color: #fff;
@@ -61,21 +46,4 @@ export const SDivModal = styled(Modal)`
 	top: 0;
 	left: 0;
 	overflow-y: scroll;
-
-	/* .modal-content {
-	.modal-body {
-		margin-top: -3rem;
-		margin-bottom: 0;
-		overflow: hidden;
-	}
-	.btn-close {
-		font-size: 12px;
-	}
-	.btn-close:focus {
-		outline: 0;
-		box-shadow: none;
-	}
-	@media (max-width: 800px) {
-		width: 100%;
-	} */
 `;
