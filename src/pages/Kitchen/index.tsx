@@ -5,7 +5,7 @@ export default function Kitchen() {
 	return (
 		<>
 			<Header />
-			<div />
+			<div>Cozinha</div>
 		</>
 	);
 }
