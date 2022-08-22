@@ -59,6 +59,11 @@ export const SGridContainer = styled.div`
 		border: 2px solid transparent;
 		filter: grayscale(100%);
 
+		&.active {
+			filter: grayscale(0%);
+			border: 2px solid #125c13;
+		}
+
 		img {
 			width: 50%;
 		}
