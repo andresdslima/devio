@@ -1,6 +1,8 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as S from './styled';
-import { ProductProps } from '../../types';
+import { PersistedReducerProps, ProductProps } from '../../@types';
+import { setMyOrder } from '../../store/modules/products';
 
 export default function CardProduct({
 	id,
@@ -9,6 +11,12 @@ export default function CardProduct({
 	price,
 	image,
 }: ProductProps) {
+	const dispatch = useDispatch();
+	const myOrder2 = useSelector(
+		(state: PersistedReducerProps) => state.persistedReducer.myOrder,
+	);
+	// dispatch(setMyOrder
+
 	const getMyOrder = () => {
 		return JSON.parse(localStorage.getItem('products') || `[]`);
 	};
