@@ -17,9 +17,12 @@ export interface ProductProps {
 }
 
 export interface OrderProps {
-	client_id: number;
+	order_id: number;
 	client: string;
-	comment: string;
+	comment?: string;
+	payment: string;
+	change?: number;
+	total: number;
 }
 
 export interface ProductsSliceProps {
