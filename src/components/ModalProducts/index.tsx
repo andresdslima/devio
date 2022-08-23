@@ -27,13 +27,13 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 				<Modal.Header closeButton>
 					<h2>Revise seu pedido</h2>
 				</Modal.Header>
-				<Modal.Body className="mobile">
+				<Modal.Body className="modal-mobile">
 					{products.length === 0 && (
 						<h4>Ainda não há nenhum item no seu pedido.</h4>
 					)}
 					{products.length !== 0 &&
 						products.map(product => (
-							<div className="order-item" key={product.id}>
+							<div className="modal-mobile__item" key={product.id}>
 								<img src={product.image} alt={product.name} />
 								<div>
 									<h4>{product.name}</h4>
@@ -45,13 +45,7 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 							</div>
 						))}
 					<S.SObsContainer>
-						<h4>Nome e observações</h4>
-						<input
-							type="text"
-							name="client"
-							id="client"
-							placeholder="Seu nome"
-						/>
+						<h4>Observações</h4>
 						<textarea
 							name="comment"
 							id="comment"
@@ -72,7 +66,7 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 						<h2>R${getTotal()},00</h2>
 					</S.STotalContainer>
 				</Modal.Body>
-				<Modal.Footer className="buttonContainer">
+				<Modal.Footer className="button-container">
 					<S.SButton
 						color="#fff"
 						type="button"
