@@ -3,15 +3,15 @@ import { Button, Modal } from 'react-bootstrap';
 import { ButtonProps } from '../../@types';
 
 export const SDivModal = styled(Modal)`
-	padding: 5rem 15rem !important;
+	padding: 4rem 15rem !important;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	background-color: #9f9f9f;
-	opacity: 0.9;
+	opacity: 0.975;
 	position: fixed;
 	z-index: 1;
 	top: 0;
@@ -19,13 +19,14 @@ export const SDivModal = styled(Modal)`
 	overflow-y: scroll;
 
 	@media (max-width: 768px) {
-		padding: 1rem;
-		width: 100%;
-		height: 100%;
+		padding: 2rem !important;
 		display: flex !important;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
+	}
+
+	@media (max-width: 425px) {
+		* {
+			font-size: 0.9rem;
+		}
 	}
 `;
 
@@ -34,7 +35,7 @@ export const SSubcontainer = styled.div`
 	border-radius: 0.5rem;
 	padding: 2rem 3rem;
 	width: 100%;
-	height: auto;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -63,18 +64,14 @@ export const SSubcontainer = styled.div`
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			gap: 3rem;
+			gap: 2rem;
 			margin-top: 1rem;
 		}
 	}
 
 	@media (max-width: 768px) {
-		padding: 1rem;
-		width: 100%;
-		height: 100vh !important;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
+		padding: 2rem;
+		margin-top: 10rem;
 
 		div {
 			&.mobile {
@@ -82,6 +79,9 @@ export const SSubcontainer = styled.div`
 				flex-direction: column;
 			}
 		}
+	}
+	@media (max-width: 425px) {
+		margin-top: 4rem;
 	}
 `;
 
@@ -132,8 +132,8 @@ export const SButton = styled(Button)<ButtonProps>`
 	}
 
 	@media (max-width: 425px) {
-		width: 80%;
-		margin: 0 auto;
+		padding: ${props =>
+			props.color === '#fff' ? '0.5rem 1.5rem' : '0.5rem 2.5rem'};
 	}
 `;
 
