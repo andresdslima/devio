@@ -1,4 +1,4 @@
-import { ProductProps } from '../types';
+import { ProductProps } from '../@types';
 import bigMac from '../assets/images/bigMac.png';
 import fritas from '../assets/images/acompanhamentos.jpg';
 import coca from '../assets/images/bebidas.png';

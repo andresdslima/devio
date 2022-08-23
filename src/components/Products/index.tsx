@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './styled';
 import { products } from '../../services/products';
-import { ModalProps } from '../../types';
+import { ModalProps } from '../../@types';
 import CardProduct from '../CardProduct';
 
 export default function Products({ setShowModal }: ModalProps) {

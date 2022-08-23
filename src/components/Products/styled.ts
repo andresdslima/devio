@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 import { Container, Button } from 'react-bootstrap';
-
-interface ButtonProps {
-	color: string;
-}
+import { ButtonProps } from '../../@types';
 
 export const SContainer = styled(Container)`
 	padding: 3rem 7.5rem;

@@ -5,7 +5,7 @@ export default function Orders() {
 	return (
 		<>
 			<Header />
-			<div />
+			<div>Retirada</div>
 		</>
 	);
 }

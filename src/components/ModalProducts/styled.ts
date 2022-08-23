@@ -1,13 +1,41 @@
 import styled from 'styled-components';
-import { Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
+import { ButtonProps } from '../../@types';
+
+export const SDivModal = styled(Modal)`
+	padding: 4rem 15rem !important;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	background-color: #9f9f9f;
+	opacity: 0.975;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	overflow-y: scroll;
+
+	@media (max-width: 768px) {
+		padding: 2rem !important;
+		display: flex !important;
+	}
+
+	@media (max-width: 425px) {
+		* {
+			font-size: 0.9rem;
+		}
+	}
+`;
 
 export const SSubcontainer = styled.div`
 	background-color: #fff;
-	opacity: 1;
 	border-radius: 0.5rem;
-	padding: 2rem;
+	padding: 2rem 3rem;
 	width: 100%;
-	height: auto;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -18,6 +46,8 @@ export const SSubcontainer = styled.div`
 	}
 
 	div {
+		opacity: 1 !important;
+
 		&.order-item {
 			display: flex;
 			gap: 0;
@@ -29,21 +59,103 @@ export const SSubcontainer = styled.div`
 				flex-direction: column;
 			}
 		}
+
+		&.buttonContainer {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 2rem;
+			margin-top: 1rem;
+		}
+	}
+
+	@media (max-width: 768px) {
+		padding: 2rem;
+		margin-top: 10rem;
+
+		div {
+			&.mobile {
+				display: flex;
+				flex-direction: column;
+			}
+		}
+	}
+	@media (max-width: 425px) {
+		margin-top: 4rem;
 	}
 `;
 
-export const SDivModal = styled(Modal)`
-	padding: 5rem 15rem !important;
+export const SObsContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	width: 100vw;
-	height: 100vh;
-	background-color: #9f9f9f;
-	opacity: 0.9;
-	position: fixed;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	overflow-y: scroll;
+	gap: 0;
+	margin-bottom: 1rem;
+
+	h4 {
+		margin-top: 1rem;
+	}
+
+	input,
+	textarea {
+		border-radius: 0.25rem;
+		border: none;
+		padding: 0.75rem 2rem;
+		background-color: #f4f4f4;
+		margin: 0.5rem auto;
+		font-size: 0.875rem;
+		width: 100%;
+	}
+`;
+
+export const SButton = styled(Button)<ButtonProps>`
+	background-color: ${props => props.color};
+	color: ${props => (props.color === '#125c13' ? '#fff' : '#125c13')};
+	border: ${props => (props.color === '#fff' ? '1px solid #125c13' : 'none')};
+	padding: 1rem 3rem;
+	border-radius: 1rem;
+	width: 40%;
+	opacity: 0.8;
+	font-size: 0.875rem;
+	font-weight: 700;
+	transition: all 0.3s ease-in-out;
+
+	&:hover {
+		opacity: 1;
+		transform: scale(1.05);
+		cursor: pointer;
+	}
+
+	@media (max-width: 768px) {
+		width: 50%;
+		margin: 0 auto;
+	}
+
+	@media (max-width: 425px) {
+		padding: ${props =>
+			props.color === '#fff' ? '0.5rem 1.5rem' : '0.5rem 2.5rem'};
+	}
+`;
+
+export const STotalContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border: 1px solid #9f9f9f;
+	border-radius: 0.25rem;
+	padding: 0.75rem 2rem;
+
+	& > div {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	em {
+		margin: 0.25rem 0;
+	}
+
+	span {
+		margin: 0.5rem 0;
+	}
 `;
