@@ -30,6 +30,11 @@ export const SCardProduct = styled.div`
 		border: 2px solid #125c13;
 	}
 
+	@media (min-width: 2000px) {
+		width: 400px;
+		height: 500px;
+	}
+
 	@media (max-width: 768px) {
 		filter: grayscale(0%);
 	}
