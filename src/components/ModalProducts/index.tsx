@@ -78,13 +78,14 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 						type="button"
 						onClick={() => setShowModal(false)}
 					>
-						Adicionar mais itens
+						Continuar adicionando
 					</S.SButton>
 					<S.SButton
 						color="#125c13"
 						type="button"
 						onClick={() => {
 							setShowModal(false);
+							// dispatch(
 							navigate('/pagamento');
 						}}
 					>
