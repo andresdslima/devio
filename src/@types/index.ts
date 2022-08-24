@@ -14,12 +14,18 @@ export interface ProductProps {
 	price: string;
 	categoria?: string;
 	image: string;
+	status?: string;
+	isActive?: boolean;
 }
 
 export interface OrderProps {
-	client_id: number;
+	id: number;
 	client: string;
-	comment: string;
+	comment?: string;
+	payment: string;
+	change?: number;
+	total: number;
+	status: string;
 }
 
 export interface ProductsSliceProps {
