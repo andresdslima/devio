@@ -44,15 +44,6 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 								<strong>R${product.price}</strong>
 							</div>
 						))}
-					<S.SObsContainer>
-						<h4>Observações</h4>
-						<textarea
-							name="comment"
-							id="comment"
-							rows={5}
-							placeholder="Observações"
-						/>
-					</S.SObsContainer>
 					<S.STotalContainer>
 						{products.length !== 0 &&
 							products.map(product => (
@@ -70,7 +61,9 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 					<S.SButton
 						color="#fff"
 						type="button"
-						onClick={() => setShowModal(false)}
+						onClick={() => {
+							setShowModal(false);
+						}}
 					>
 						Continuar adicionando
 					</S.SButton>
@@ -79,7 +72,6 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 						type="button"
 						onClick={() => {
 							setShowModal(false);
-							// dispatch(
 							navigate('/pagamento');
 						}}
 					>

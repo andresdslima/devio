@@ -90,28 +90,6 @@ export const SSubcontainer = styled.div`
 	}
 `;
 
-export const SObsContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	gap: 0;
-	margin-bottom: 1rem;
-
-	h4 {
-		margin-top: 1rem;
-	}
-
-	textarea {
-		border-radius: 0.25rem;
-		border: none;
-		padding: 0.75rem 2rem;
-		background-color: #f4f4f4;
-		margin: 0.5rem auto;
-		font-size: 0.875rem;
-		width: 100%;
-	}
-`;
-
 export const SButton = styled(Button)<ButtonProps>`
 	background-color: ${props => props.color};
 	color: ${props => (props.color === '#125c13' ? '#fff' : '#125c13')};
@@ -148,6 +126,7 @@ export const STotalContainer = styled.div`
 	border: 1px solid #9f9f9f;
 	border-radius: 0.25rem;
 	padding: 0.75rem 2rem;
+	margin: 1rem 0;
 
 	& > div {
 		display: flex;
