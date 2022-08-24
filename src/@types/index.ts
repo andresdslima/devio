@@ -14,10 +14,12 @@ export interface ProductProps {
 	price: string;
 	categoria?: string;
 	image: string;
+	status?: string;
+	isActive?: boolean;
 }
 
 export interface OrderProps {
-	order_id: number;
+	id: number;
 	client: string;
 	comment?: string;
 	payment: string;
