@@ -34,6 +34,25 @@ export const SContainer = styled(Container)`
 			font-size: 2rem;
 		}
 	}
+
+	@media (max-width: 768px) {
+		padding: 3rem;
+	}
+
+	@media (max-width: 425px) {
+		padding: 3rem 1rem;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		margin: 0 auto;
+
+		div {
+			&.order-ready {
+				margin-left: 0;
+			}
+		}
+	}
 `;
 
 export const SDiv = styled.div<DivProps>`
@@ -42,5 +61,10 @@ export const SDiv = styled.div<DivProps>`
 	h1 {
 		opacity: 0.8;
 		color: #9f9f9f;
+	}
+
+	@media (max-width: 425px) {
+		border-right: none;
+		border-bottom: ${props => props.border};
 	}
 `;
