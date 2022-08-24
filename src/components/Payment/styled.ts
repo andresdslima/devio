@@ -26,7 +26,7 @@ export const SChangeContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 4rem;
+	gap: 1rem;
 
 	@media (max-width: 425px) {
 		flex-direction: column;
