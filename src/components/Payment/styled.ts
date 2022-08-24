@@ -115,10 +115,19 @@ export const SPaymentContainer = styled.div`
 		}
 	}
 
+	textarea {
+		border-radius: 0.25rem;
+		border: none;
+		padding: 0.75rem 2rem;
+		background-color: #f4f4f4;
+		margin: 0.5rem auto;
+		font-size: 0.875rem;
+		width: 100%;
+	}
+
 	@media (max-width: 768px) {
 		flex-direction: column;
 		justify-content: center;
-		text-align: center;
 
 		&.mobile {
 			flex-direction: row;

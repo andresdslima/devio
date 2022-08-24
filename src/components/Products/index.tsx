@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as S from './styled';
 import { products } from '../../services/products';
-import { ModalProps } from '../../@types';
+import { ModalProps, PersistedReducerProps } from '../../@types';
 import CardProduct from '../CardProduct';
+import { deleteMyOrder } from '../../store/modules/products';
 
 export default function Products({ setShowModal }: ModalProps) {
 	const [searchValue, setSearchValue] = useState('');
 	const [productsList, setProductsList] = useState(products);
+	const dispatch = useDispatch();
+
+	const initialOrder = useSelector(
+		(state: PersistedReducerProps) => state.persistedReducer.myOrder,
+	);
+
+	const [myOrder, setMyOrder] = useState(initialOrder);
 
 	const cancelOrder = () => {
 		localStorage.setItem('products', '[]');
+		dispatch(deleteMyOrder());
 		window.location.reload();
 	};
+
+	const isActive = (id: number) => myOrder.some(product => product.id === id);
 
 	useEffect(() => {
 		const newProductList = productsList.filter(product =>
@@ -19,8 +31,16 @@ export default function Products({ setShowModal }: ModalProps) {
 		);
 
 		setProductsList(newProductList);
-		if (searchValue === '') setProductsList(products);
+		if (searchValue.length <= 1) setProductsList(products);
 	}, [searchValue]);
+
+	useEffect(() => {
+		const myOrderReference = JSON.parse(
+			localStorage.getItem('products') || `[]`,
+		);
+
+		setMyOrder(myOrderReference);
+	}, [productsList]);
 
 	return (
 		<S.SContainer>
@@ -42,15 +62,17 @@ export default function Products({ setShowModal }: ModalProps) {
 					{productsList.map(product => (
 						<CardProduct
 							id={product.id}
+							key={product.id}
 							name={product.name}
 							description={product.description}
 							price={product.price}
 							image={product.image}
+							isActive={isActive(product.id)}
 						/>
 					))}
 				</S.SGridContainer>
 			</div>
-			<div className="buttonContainer">
+			<div className="button-container">
 				<S.SButton color="#fff" type="button" onClick={cancelOrder}>
 					Cancelar
 				</S.SButton>
