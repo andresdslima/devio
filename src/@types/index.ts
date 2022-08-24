@@ -15,7 +15,7 @@ export interface ProductProps {
 	categoria?: string;
 	image: string;
 	status?: string;
-	isActive?: boolean;
+	client?: string;
 }
 
 export interface OrderProps {

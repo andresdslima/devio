@@ -45,9 +45,11 @@ const productsSlice = createSlice({
 		deleteOrderFromAll: (state, action) => {
 			Object.assign(state, {
 				...state,
-				allOrders: state.allOrders.filter(
-					orderArray => orderArray[orderArray.length - 1].id !== action.payload,
-				),
+				allOrders: state.allOrders.filter(orderArray => {
+					const order = orderArray[orderArray.length - 1];
+
+					return order.id !== action.payload;
+				}),
 			});
 		},
 	},
