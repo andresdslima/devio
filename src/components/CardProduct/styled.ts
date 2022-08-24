@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const SCardProduct = styled.div`
+interface DivProps {
+	isActive: string;
+}
+
+export const SCardProduct = styled.div<DivProps>`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -11,13 +15,10 @@ export const SCardProduct = styled.div`
 	background-color: #fdfdfd;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 	transition: all 0.3s ease-in-out;
-	border: 2px solid transparent;
-	filter: grayscale(100%);
-
-	&.active {
-		filter: grayscale(0%);
-		border: 2px solid #125c13;
-	}
+	border: ${props =>
+		props.isActive === 'true' ? '2px solid #125c13' : '2px solid transparent'};
+	filter: ${props =>
+		props.isActive === 'true' ? 'grayscale(0%)' : 'grayscale(100%)'};
 
 	img {
 		width: 50%;
