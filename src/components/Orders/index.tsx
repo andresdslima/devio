@@ -5,14 +5,14 @@ import * as S from './styled';
 export default function OrderList() {
 	const allOrders: OrderProps[] = [
 		{
-			order_id: 1,
+			id: 1,
 			client: 'Lara',
 			payment: 'credito',
 			total: 110,
 			status: 'pending',
 		},
 		{
-			order_id: 2,
+			id: 2,
 			client: 'Andre',
 			comment: 'sem cebola',
 			payment: 'dinheiro',
@@ -21,7 +21,7 @@ export default function OrderList() {
 			status: 'pending',
 		},
 		{
-			order_id: 3,
+			id: 3,
 			client: 'Lucas',
 			payment: 'dinheiro',
 			change: 10,
@@ -35,13 +35,17 @@ export default function OrderList() {
 			<S.SDiv border="3px solid #000">
 				<h2>Preparando:</h2>
 				{allOrders.map(
-					order => order.status === 'pending' && <h1>{order.client}</h1>,
+					order =>
+						order.status === 'pending' && (
+							<h1 key={order.id}>{order.client}</h1>
+						),
 				)}
 			</S.SDiv>
 			<div className="order-ready">
 				<h2>Pronto:</h2>
 				{allOrders.map(
-					order => order.status === 'ready' && <h1>{order.client}</h1>,
+					order =>
+						order.status === 'ready' && <h1 key={order.id}>{order.client}</h1>,
 				)}
 			</div>
 		</S.SContainer>
