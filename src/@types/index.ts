@@ -23,6 +23,7 @@ export interface OrderProps {
 	payment: string;
 	change?: number;
 	total: number;
+	status: string;
 }
 
 export interface ProductsSliceProps {
