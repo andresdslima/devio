@@ -85,7 +85,6 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 						type="button"
 						onClick={() => {
 							setShowModal(false);
-							// dispatch(
 							navigate('/pagamento');
 						}}
 					>
