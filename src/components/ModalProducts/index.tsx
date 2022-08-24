@@ -21,6 +21,17 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 		return total;
 	};
 
+	const finishOrder = () => {
+		if (getTotal() === 0) {
+			alert('Por favor, adicione algum produto ao pedido!');
+			setShowModal(false);
+			return;
+		}
+
+		setShowModal(false);
+		navigate('/pagamento');
+	};
+
 	return (
 		<S.SDivModal show={showModal} onHide={handleClose} centered>
 			<S.SSubcontainer>
@@ -44,6 +55,12 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 								<strong>R${product.price}</strong>
 							</div>
 						))}
+					<small>
+						<em>
+							*Qualquer observação no pedido poderá ser realizada na próxima
+							página.
+						</em>
+					</small>
 					<S.STotalContainer>
 						{products.length !== 0 &&
 							products.map(product => (
@@ -67,14 +84,7 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 					>
 						Continuar adicionando
 					</S.SButton>
-					<S.SButton
-						color="#125c13"
-						type="button"
-						onClick={() => {
-							setShowModal(false);
-							navigate('/pagamento');
-						}}
-					>
+					<S.SButton color="#125c13" type="button" onClick={finishOrder}>
 						Finalizar pedido
 					</S.SButton>
 				</Modal.Footer>
