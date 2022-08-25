@@ -28,6 +28,10 @@ export const SChangeContainer = styled.div`
 	justify-content: space-between;
 	gap: 1rem;
 
+	@media (max-width: 1024px) {
+		gap: 0;
+	}
+
 	@media (max-width: 425px) {
 		flex-direction: column;
 	}
@@ -123,6 +127,18 @@ export const SPaymentContainer = styled.div`
 		margin: 0.5rem auto;
 		font-size: 0.875rem;
 		width: 100%;
+	}
+
+	@media (max-width: 1024px) {
+		gap: 0;
+
+		& > div {
+			margin-right: 2rem;
+		}
+
+		form {
+			width: 50%;
+		}
 	}
 
 	@media (max-width: 768px) {

@@ -28,14 +28,22 @@ const productsSlice = createSlice({
 				allOrders: [...state.allOrders, action.payload],
 			});
 		},
-		changeOrderStatus: (state, action) => {
+		changeOrderStatusRedux: (state, action) => {
 			Object.assign(state, {
 				...state,
 				allOrders: state.allOrders.map(orderArray => {
 					const order = orderArray[orderArray.length - 1];
 
 					if (order.id === action.payload) {
-						order.status = 'ready';
+						if (order.status === 'pending') {
+							order.status.replace('pending', 'ready');
+							return orderArray;
+						}
+
+						if (order.status === 'ready') {
+							order.status.replace('ready', 'pending');
+							return orderArray;
+						}
 					}
 
 					return orderArray;
@@ -59,7 +67,7 @@ export const {
 	setMyOrder,
 	setAllOrders,
 	deleteMyOrder,
-	changeOrderStatus,
+	changeOrderStatusRedux,
 	deleteOrderFromAll,
 } = productsSlice.actions;
 

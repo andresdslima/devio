@@ -16,18 +16,29 @@ export default function CardProduct({
 	const [isSelected, setIsSelected] = useState(false);
 
 	const getMyOrder = () => {
-		return JSON.parse(localStorage.getItem('products') || `[]`);
+		return JSON.parse(localStorage.getItem('myOrder') || `[]`);
 	};
+
+	const productCcounter = (productId: string) => {
+		const myOrder = getMyOrder();
+		const count = myOrder.filter(
+			(product: ProductProps) => product.id === productId,
+		).length;
+		return count;
+	};
+
+	const [quantity, setQuantity] = useState(productCcounter(id));
 
 	const addItem = (selectedProduct: ProductProps) => {
 		const myOrder = getMyOrder();
 
 		localStorage.setItem(
-			'products',
+			'myOrder',
 			JSON.stringify([...myOrder, selectedProduct]),
 		);
 
 		dispatch(setMyOrder([selectedProduct]));
+		setQuantity(quantity + 1);
 	};
 
 	return (
@@ -46,6 +57,7 @@ export default function CardProduct({
 				<em>{description}</em>
 			</small>
 			<strong>R${price}</strong>
+			<span>{quantity}</span>
 		</S.SCardProduct>
 	);
 }
