@@ -27,6 +27,13 @@ export const SContainer = styled(Container)`
 
 			h1 {
 				color: #125c13;
+				animation: blinker 2s linear infinite;
+			}
+
+			@keyframes blinker {
+				50% {
+					opacity: 0;
+				}
 			}
 		}
 
@@ -37,6 +44,18 @@ export const SContainer = styled(Container)`
 
 	@media (max-width: 768px) {
 		padding: 3rem;
+
+		h1 {
+			font-size: 3rem !important;
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		div {
+			&.order-ready {
+				margin-left: 0;
+			}
+		}
 	}
 
 	@media (max-width: 425px) {
@@ -46,12 +65,6 @@ export const SContainer = styled(Container)`
 		align-items: center;
 		text-align: center;
 		margin: 0 auto;
-
-		div {
-			&.order-ready {
-				margin-left: 0;
-			}
-		}
 	}
 `;
 
@@ -66,5 +79,6 @@ export const SDiv = styled.div<DivProps>`
 	@media (max-width: 425px) {
 		border-right: none;
 		border-bottom: ${props => props.border};
+		padding-bottom: 2rem;
 	}
 `;

@@ -1,5 +1,7 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import * as S from './styled';
 import { products } from '../../services/products';
 import { ModalProps, PersistedReducerProps } from '../../@types';
@@ -17,13 +19,21 @@ export default function Products({ setShowModal }: ModalProps) {
 
 	const [myOrder, setMyOrder] = useState(initialOrder);
 
-	const cancelOrder = () => {
-		localStorage.setItem('products', '[]');
-		dispatch(deleteMyOrder());
-		window.location.reload();
+	const confirmation = () => {
+		// eslint-disable-next-line no-restricted-globals, no-alert
+		return confirm('Tem certeza que deseja canelar o seu pedido?');
 	};
 
-	const isActive = (id: number) => myOrder.some(product => product.id === id);
+	const cancelOrder = () => {
+		if (!confirmation()) return;
+
+		localStorage.setItem('myOrder', '[]');
+		dispatch(deleteMyOrder());
+		window.location.reload();
+		toast.error('Pedido cancelado com sucesso!');
+	};
+
+	const isActive = (id: string) => myOrder.some(product => product.id === id);
 
 	useEffect(() => {
 		const newProductList = productsList.filter(product =>
@@ -36,7 +46,7 @@ export default function Products({ setShowModal }: ModalProps) {
 
 	useEffect(() => {
 		const myOrderReference = JSON.parse(
-			localStorage.getItem('products') || `[]`,
+			localStorage.getItem('myOrder') || `[]`,
 		);
 
 		setMyOrder(myOrderReference);
@@ -59,10 +69,10 @@ export default function Products({ setShowModal }: ModalProps) {
 				<h3>Produtos</h3>
 				<p>Selecione um produto para adicionar ao seu pedido.</p>
 				<S.SGridContainer>
-					{productsList.map(product => (
+					{productsList.map((product, index) => (
 						<CardProduct
 							id={product.id}
-							key={product.id}
+							key={`${product.id}-${index}`}
 							name={product.name}
 							description={product.description}
 							price={product.price}

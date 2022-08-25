@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router';
 import { GiWallet } from 'react-icons/gi';
 import { AiFillCreditCard } from 'react-icons/ai';
 import { BsCashCoin } from 'react-icons/bs';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import * as S from './styled';
 import { deleteMyOrder, setAllOrders } from '../../store/modules/products';
-import { PersistedReducerProps, ProductProps } from '../../@types';
+import { ProductProps } from '../../@types';
 
 export default function PaymentComponent() {
 	// We can also use the lib "formik" as well.
@@ -18,27 +19,33 @@ export default function PaymentComponent() {
 	const [paidValue, setPaidValue] = useState(0);
 	const [payment, setPayment] = useState('Dinheiro');
 
-	const allOrders = useSelector(
-		(state: PersistedReducerProps) => state.persistedReducer.allOrders,
+	const products: ProductProps[] | [] = JSON.parse(
+		localStorage.getItem('myOrder') || `[]`,
 	);
 
-	const products: ProductProps[] | [] = JSON.parse(
-		localStorage.getItem('products') || `[]`,
-	);
+	const allOrders = JSON.parse(localStorage.getItem('allOrders') || `[]`);
+
+	const confirmation = () => {
+		// eslint-disable-next-line no-restricted-globals, no-alert
+		return confirm('Tem certeza que deseja canelar o seu pedido?');
+	};
 
 	const cancelOrder = () => {
-		localStorage.setItem('products', '[]');
+		if (!confirmation()) {
+			return;
+		}
+
+		localStorage.setItem('myOrder', '[]');
 		dispatch(deleteMyOrder());
 		navigate('/');
+		toast.error('Pedido cancelado com sucesso!');
 	};
 
 	const finishOrder = () => {
 		// eslint-disable-next-line no-alert
-		alert(
-			'Pedido cadastrado com sucesso!\nSeu pedido foi encaminhado para a cozinha.',
-		);
+		toast.success('Pedido cadastrado com sucesso!');
 
-		localStorage.setItem('products', '[]');
+		localStorage.setItem('myOrder', '[]');
 		window.print();
 		navigate('/');
 	};
@@ -59,33 +66,48 @@ export default function PaymentComponent() {
 		setChange(changeValue);
 	};
 
+	function generateId() {
+		return (
+			Math.random().toString(36).substring(2) +
+			new Date().getTime().toString(36)
+		);
+	}
+
 	const handleSubmit = () => {
 		if (getTotal() === 0) {
 			// eslint-disable-next-line no-alert
-			alert('Por favor, adicione algum produto ao pedido!');
+			toast.warn('Por favor, adicione algum produto ao pedido!');
 			return;
 		}
 
-		if (client === '' || (payment === 'Dinheiro' && paidValue === 0)) {
+		if (
+			client === '' ||
+			(payment === 'Dinheiro' && paidValue === 0) ||
+			(paidValue !== 0 && change < 0)
+		) {
 			// eslint-disable-next-line no-alert
-			alert('Por favor, preencha todos os campos corretamente!');
+			toast.warn('Por favor, preencha todos os campos corretamente!');
 			return;
 		}
 
 		const newProducts = [
 			...products,
 			{
-				id: allOrders.length + 1,
+				id: generateId(),
 				client,
 				comment,
 				payment,
-				change,
+				change: change <= 0 ? null : change,
 				total: getTotal(),
 				status: 'pending',
 			},
 		];
 
 		dispatch(setAllOrders(newProducts));
+		localStorage.setItem(
+			'allOrders',
+			JSON.stringify([...allOrders, newProducts]),
+		);
 		dispatch(deleteMyOrder());
 		finishOrder();
 	};
@@ -97,7 +119,7 @@ export default function PaymentComponent() {
 	return (
 		<S.SContainer>
 			<div>
-				<GiWallet size={30} />
+				<GiWallet size={30} style={{ color: '#125C13' }} />
 				<h1>Pagamento</h1>
 			</div>
 			<S.SPaymentContainer>
@@ -105,8 +127,9 @@ export default function PaymentComponent() {
 					<h4>Resumo da compra</h4>
 					<S.STotalContainer>
 						{products.length !== 0 &&
-							products.map(product => (
-								<div key={product.id}>
+							products.map((product, index) => (
+								// eslint-disable-next-line react/no-array-index-key
+								<div key={`${product.id}-${index}`}>
 									<em>{product.name}</em>
 									<em>R${product.price}</em>
 								</div>
@@ -138,7 +161,7 @@ export default function PaymentComponent() {
 					<h4>Selecione a forma de pagamento</h4>
 					<S.SPaymentContainer className="mobile">
 						<div>
-							<AiFillCreditCard size={30} />
+							<AiFillCreditCard size={30} style={{ color: '#125C13' }} />
 							<label htmlFor="debit">
 								<strong>
 									<em>Débito</em>
@@ -156,7 +179,7 @@ export default function PaymentComponent() {
 					</S.SPaymentContainer>
 					<S.SPaymentContainer className="mobile">
 						<div>
-							<AiFillCreditCard size={30} />
+							<AiFillCreditCard size={30} style={{ color: '#125C13' }} />
 							<label htmlFor="credit">
 								<strong>
 									<em>Crédito</em>
@@ -174,7 +197,7 @@ export default function PaymentComponent() {
 					</S.SPaymentContainer>
 					<S.SPaymentContainer className="mobile">
 						<div>
-							<BsCashCoin size={30} />
+							<BsCashCoin size={30} style={{ color: '#125C13' }} />
 							<label htmlFor="cash">
 								<strong>
 									<em>Dinheiro</em>

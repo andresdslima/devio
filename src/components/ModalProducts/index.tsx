@@ -1,5 +1,7 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { Modal } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
 import { ModalProps, ProductProps } from '../../@types';
 import * as S from './styled';
@@ -9,7 +11,7 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 	const navigate = useNavigate();
 
 	const products: ProductProps[] | [] = JSON.parse(
-		localStorage.getItem('products') || `[]`,
+		localStorage.getItem('myOrder') || `[]`,
 	);
 
 	const getTotal = () => {
@@ -23,12 +25,13 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 
 	const finishOrder = () => {
 		if (getTotal() === 0) {
-			alert('Por favor, adicione algum produto ao pedido!');
-			setShowModal(false);
+			// eslint-disable-next-line no-alert
+			toast.warn('Por favor, adicione algum produto ao pedido!');
+			handleClose();
 			return;
 		}
 
-		setShowModal(false);
+		handleClose();
 		navigate('/pagamento');
 	};
 
@@ -43,8 +46,11 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 						<h4>Ainda não há nenhum item no seu pedido.</h4>
 					)}
 					{products.length !== 0 &&
-						products.map(product => (
-							<div className="modal-mobile__item" key={product.id}>
+						products.map((product, index) => (
+							<div
+								className="modal-mobile__item"
+								key={`${product.id}-${index}`}
+							>
 								<img src={product.image} alt={product.name} />
 								<div>
 									<h4>{product.name}</h4>
@@ -56,15 +62,17 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 							</div>
 						))}
 					<small>
+						<em>*Adicione mais itens clicando neles na página anterior.</em>
+						<br />
 						<em>
-							*Qualquer observação no pedido poderá ser realizada na próxima
+							**Qualquer observação no pedido poderá ser realizada na próxima
 							página.
 						</em>
 					</small>
 					<S.STotalContainer>
 						{products.length !== 0 &&
-							products.map(product => (
-								<div key={product.id}>
+							products.map((product, index) => (
+								<div key={`${product.id}-${index}`}>
 									<em>{product.name}</em>
 									<em>R${product.price}</em>
 								</div>
@@ -75,13 +83,7 @@ export default function ModalProducts({ showModal, setShowModal }: ModalProps) {
 					</S.STotalContainer>
 				</Modal.Body>
 				<Modal.Footer className="button-container">
-					<S.SButton
-						color="#fff"
-						type="button"
-						onClick={() => {
-							setShowModal(false);
-						}}
-					>
+					<S.SButton color="#fff" type="button" onClick={handleClose}>
 						Continuar adicionando
 					</S.SButton>
 					<S.SButton color="#125c13" type="button" onClick={finishOrder}>

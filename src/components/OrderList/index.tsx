@@ -1,11 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { PersistedReducerProps } from '../../@types';
+import { OrderProps, ProductProps } from '../../@types';
 import * as S from './styled';
 
 export default function OrderList() {
-	const allOrders = useSelector(
-		(state: PersistedReducerProps) => state.persistedReducer.allOrders,
+	const allOrders: (ProductProps | OrderProps)[][] = JSON.parse(
+		localStorage.getItem('allOrders') || '[]',
 	);
 
 	return (
@@ -28,7 +27,10 @@ export default function OrderList() {
 					const order = orderArray[orderArray.length - 1];
 
 					if (order.status === 'ready') {
-						return <h1 key={order.id}>{order.client}</h1>;
+						return (
+							// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+							<h1 key={order.id}>{order.client}</h1>
+						);
 					}
 
 					return null;
