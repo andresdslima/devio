@@ -40,6 +40,7 @@ export const SCardProduct = styled.div<DivProps>`
 		filter: grayscale(0%);
 		cursor: pointer;
 		border: 2px solid #125c13;
+		transform: scale(1.1);
 	}
 
 	@media (max-width: 768px) {
