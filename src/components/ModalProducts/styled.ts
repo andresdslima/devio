@@ -20,7 +20,6 @@ export const SDivModal = styled(Modal)`
 
 	@media (max-width: 768px) {
 		padding: 2rem !important;
-		display: flex !important;
 	}
 
 	@media (max-width: 425px) {
@@ -48,7 +47,7 @@ export const SSubcontainer = styled.div`
 	div {
 		opacity: 1 !important;
 
-		&.order-item {
+		&.modal-mobile__item {
 			display: flex;
 			gap: 0;
 			justify-content: space-between;
@@ -60,7 +59,7 @@ export const SSubcontainer = styled.div`
 			}
 		}
 
-		&.buttonContainer {
+		&.button-container {
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -71,40 +70,23 @@ export const SSubcontainer = styled.div`
 
 	@media (max-width: 768px) {
 		padding: 2rem;
-		margin-top: 10rem;
+		margin-top: 3rem;
 
 		div {
-			&.mobile {
+			&.modal-mobile {
 				display: flex;
 				flex-direction: column;
+
+				div {
+					&.modal-mobile__item {
+						& > div {
+							justify-content: center;
+							align-items: center;
+						}
+					}
+				}
 			}
 		}
-	}
-	@media (max-width: 425px) {
-		margin-top: 4rem;
-	}
-`;
-
-export const SObsContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	gap: 0;
-	margin-bottom: 1rem;
-
-	h4 {
-		margin-top: 1rem;
-	}
-
-	input,
-	textarea {
-		border-radius: 0.25rem;
-		border: none;
-		padding: 0.75rem 2rem;
-		background-color: #f4f4f4;
-		margin: 0.5rem auto;
-		font-size: 0.875rem;
-		width: 100%;
 	}
 `;
 
@@ -144,6 +126,7 @@ export const STotalContainer = styled.div`
 	border: 1px solid #9f9f9f;
 	border-radius: 0.25rem;
 	padding: 0.75rem 2rem;
+	margin: 1rem 0;
 
 	& > div {
 		display: flex;

@@ -8,18 +8,31 @@ export interface ModalProps {
 }
 
 export interface ProductProps {
-	id: number;
+	id: string;
 	name: string;
 	description: string;
 	price: string;
-	categoria?: string;
+	category?: string;
 	image: string;
+	status?: string;
+	client?: string;
+	isActive?: boolean;
+	amount?: number;
+	comment?: string;
+	change?: number;
 }
 
 export interface OrderProps {
-	client_id: number;
+	id: string;
 	client: string;
-	comment: string;
+	comment?: string;
+	payment: string;
+	change?: number;
+	total: number;
+	status: string;
+	name?: string;
+	description?: string;
+	image?: string;
 }
 
 export interface ProductsSliceProps {

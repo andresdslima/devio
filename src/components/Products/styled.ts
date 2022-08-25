@@ -10,7 +10,7 @@ export const SContainer = styled(Container)`
 	width: 100%;
 
 	div {
-		&.buttonContainer {
+		&.button-container {
 			display: flex;
 			justify-content: flex-end;
 		}
@@ -24,7 +24,7 @@ export const SContainer = styled(Container)`
 		padding: 1rem;
 
 		div {
-			&.buttonContainer {
+			&.button-container {
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
